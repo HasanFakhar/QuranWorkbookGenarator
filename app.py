@@ -93,7 +93,9 @@ def build_html(surah, lines_between=4, font_size=34, line_spacing=1.9):
         --gold: #b18a47;
     }}
 
-    * {{ box-sizing: border-box; }}
+    * {{
+        box-sizing: border-box;
+    }}
 
     html, body {{
         margin: 0;
@@ -106,19 +108,32 @@ def build_html(surah, lines_between=4, font_size=34, line_spacing=1.9):
         font-family: "Amiri", "Noto Naskh Arabic", "Traditional Arabic", serif;
     }}
 
+    /* =========================
+       A4 PAGE - SCREEN / PREVIEW
+       ========================= */
+
     .page {{
         width: var(--page-width);
         min-height: var(--page-min-height);
+
         margin: 12mm auto;
         padding: 14mm 17mm 16mm;
+
         background: white;
-        box-shadow: 0 0 8px rgba(0,0,0,.15);
+        box-shadow: 0 0 8px rgba(0, 0, 0, .15);
+
         overflow: hidden;
     }}
 
+    /* =========================
+       SURAH HEADER
+       ========================= */
+
     .header {{
         text-align: center;
+
         border-bottom: 1px solid var(--gold);
+
         padding-bottom: 8mm;
         margin-bottom: 10mm;
     }}
@@ -149,17 +164,24 @@ def build_html(surah, lines_between=4, font_size=34, line_spacing=1.9):
         margin-top: 2mm;
     }}
 
+    /* =========================
+       AYAH
+       ========================= */
+
     .ayah-block {{
         break-inside: avoid;
         page-break-inside: avoid;
+
         margin: 0 0 5mm;
     }}
 
     .ayah-text {{
         text-align: center;
+
         font-size: {font_size}px;
         line-height: {line_spacing};
         font-weight: 400;
+
         padding: 2mm 0 4mm;
     }}
 
@@ -169,46 +191,90 @@ def build_html(surah, lines_between=4, font_size=34, line_spacing=1.9):
         margin-inline-start: .25em;
     }}
 
+    /* =========================
+       WRITING LINES
+       ========================= */
+
     .writing-lines {{
         display: flex;
         flex-direction: column;
+
         gap: 15mm;
+
         padding: 2mm 0 7mm;
     }}
 
     .writing-line {{
         height: 0;
+
         border-top: 1px solid var(--rule);
+
         width: 100%;
     }}
 
+    /* =========================
+       PRINT / PDF
+       ========================= */
+
     @media print {{
+
         @page {{
             size: A4 portrait;
-        margin: 12mm 17mm 15mm 17mm;
+
+            /*
+             * Remove browser left/right
+             * page margins.
+             */
+            margin: 15mm 0 15mm 0;
         }}
 
-        html, body {{
+        html,
+        body {{
             background: white;
+
+            margin: 0;
+            padding: 0;
         }}
 
         .page {{
             width: 210mm;
             min-height: 297mm;
+
+            /*
+             * No outer margin when printing.
+             */
             margin: 0;
+
+            /*
+             * Keep padding here so the Quran
+             * text does not touch the edge.
+             */
+            padding: 14mm 17mm 16mm;
+
+            background: white;
+
             box-shadow: none;
+
             page-break-after: always;
+            break-after: page;
         }}
 
         .page:last-child {{
             page-break-after: auto;
+            break-after: auto;
         }}
     }}
 
+    /* =========================
+       MOBILE / SMALL SCREEN
+       ========================= */
+
     @media screen and (max-width: 800px) {{
+
         .page {{
             width: 100%;
             min-height: auto;
+
             margin: 0;
             padding: 20px;
         }}
