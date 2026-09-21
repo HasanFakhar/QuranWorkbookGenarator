@@ -57,7 +57,7 @@ def build_html(surah, lines_between=4, font_size=34, line_spacing=1.9):
         ayah_no = ayah["numberInSurah"]
 
         writing_lines = ""
-        if index < len(ayahs) - 1:
+        if index < len(ayahs):
             writing_lines = (
                 '<div class="writing-lines">'
                 + "".join('<div class="writing-line"></div>' for _ in range(lines_between))
@@ -185,7 +185,7 @@ def build_html(surah, lines_between=4, font_size=34, line_spacing=1.9):
     @media print {{
         @page {{
             size: A4 portrait;
-            margin: 0;
+        margin: 12mm 17mm 15mm 17mm;
         }}
 
         html, body {{
